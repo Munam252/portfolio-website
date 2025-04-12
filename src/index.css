@@ -1,0 +1,33 @@
+/* @import "bootstrap/dist/css/bootstrap.min.css"; Bootstrap first */
+@tailwind base;
+@tailwind components;
+@tailwind utilities; /* Tailwind last */
+
+@font-face {
+    font-family: 'ArchivoBlack';
+    src: url(../public/ArchivoBlack-Regular.ttf);
+}
+.archivo-black {
+    font-family: 'ArchivoBlack', sans-serif;
+}
+@font-face {
+    font-family: 'Anton-Regular';
+    src: url(../public/Anton-Regular.ttf);
+}
+.anton-regular {
+    font-family: 'Anton-Regular', sans-serif;
+}
+@font-face {
+    font-family: 'Ballet-Regular';
+    src: url(../public/Ballet-Regular-VariableFont_opsz.ttf);
+}
+.ballet-regular {
+    font-family: 'Ballet-Regular', sans-serif;
+}
+@font-face {
+    font-family: 'Archivo-Variable';
+    src: url(../public/Archivo-VariableFont_wdth,wght.ttf);
+}
+.archivo-variable {
+    font-family: 'Archivo-Variable', sans-serif;
+}

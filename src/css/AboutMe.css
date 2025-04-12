@@ -1,0 +1,39 @@
+/* Custom animations */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .profile-image-container {
+      margin-bottom: 2rem;
+    }
+    
+    .personal-info-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .experience-column, .education-column {
+      padding: 1.5rem;
+    }
+  }
+  
+  /* Project card hover effect */
+  .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  /* Tool tag hover effect */
+  .tool-tag:hover {
+    background-color: #10b981;
+    color: white;
+    transition: all 0.2s ease;
+  }

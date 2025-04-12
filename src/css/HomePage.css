@@ -1,0 +1,70 @@
+.homepage {
+  scroll-behavior: smooth;
+}
+
+.name-container {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+.say-hello-btn {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  overflow: hidden;
+}
+
+.profile-container {
+  background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+}
+
+@media (max-width: 768px) {
+  .flex.h-screen {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+  }
+  
+  .name-container, .profile-container {
+    width: 100%;
+    padding: 2rem;
+  }
+  
+  .name-container h1 {
+    font-size: 3rem;
+  }
+  
+  .profile-container img {
+    max-height: 50vh;
+  }
+  
+  .fixed.right-10.bottom-10 {
+    right: 1rem;
+    bottom: 1rem;
+    flex-direction: row;
+    gap: 1rem;
+  }
+  
+  .cursor {
+    display: none;
+  }
+}
+
+/* Animation for floating elements */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Custom cursor */
+.cursor {
+  transition: transform 0.2s ease;
+}
+
+/* Button hover effect */
+.say-hello-btn:hover {
+  transform: translateY(-3px);
+}
