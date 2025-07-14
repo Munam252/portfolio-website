@@ -25,6 +25,22 @@ const Experience = () => {
         "Built a scalable e-commerce platform using CSS, php, PhpMyAdmin(Database), creating a user friendly experience",
         "Designed an intuitive front-end with HTML/CSS, ensuring a seamless user experience"
       ]
+    },
+    {
+      title: "Full Stack Developer",
+      company: "Switch Communications - Farm to Home",
+      type: "On-site",
+      year: "June 2025 - current",
+      location: "Islamabad, Pakistan",
+      points: [
+        "Currently working as a Full Stack Developer, contributing to ongoing projects and platform enhancements.",
+        "Developed and maintained scalable web applications using Laravel and TypeScript.",
+        "Designed and optimized MySQL databases for high performance and reliability.",
+        "Implemented RESTful APIs and integrated third-party services to enhance platform capabilities.",
+        "Collaborated with cross-functional teams to deliver end-to-end solutions in an agile environment.",
+        "Utilized modern DevOps practices for CI/CD and deployment automation.",
+        "Worked on both frontend and backend, ensuring seamless user experience and robust backend logic."
+      ]
     }
   ];
 
