@@ -1,17 +1,22 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import HomePage from "./components/HomePage";
+import AboutMe from "./components/AboutMe";
+import Experience from "./components/Experience";
 import MyProjects from "./components/MyProjects";
+import Contact from "./components/Contact";
+import MyFooter from "./components/myFooter";
+
 const App = () => {
   return (
     <>
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/Myproject" element={<MyProjects />} />
-      </Routes>
-    </Router>
-
+      <Navbar />
+      <HomePage />
+      <AboutMe />
+      <Experience />
+      <MyProjects />
+      <Contact />
+      <MyFooter />
     </>
   );
 };
