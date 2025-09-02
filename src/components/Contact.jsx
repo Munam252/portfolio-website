@@ -12,15 +12,42 @@ const socialLinks = [
 const Contact = () => {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    setError(''); // Clear error when user starts typing
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    // You can add email sending logic here (e.g., EmailJS, Formspree, etc.)
+    setLoading(true);
+    setError('');
+
+    try {
+      const response = await fetch('http://localhost:5000/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitted(true);
+        setForm({ name: '', email: '', message: '' }); // Reset form
+      } else {
+        setError(data.message || 'Failed to send message. Please try again.');
+      }
+    } catch (err) {
+      setError('Network error. Please check if the server is running and try again.');
+      console.error('Error sending message:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -64,6 +91,16 @@ const Contact = () => {
             </motion.div>
           ) : (
             <form className="space-y-6" onSubmit={handleSubmit} autoComplete="off">
+              {error && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg"
+                >
+                  {error}
+                </motion.div>
+              )}
+              
               <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }}>
                 <label className="block text-dark font-semibold mb-2" htmlFor="name">Name</label>
                 <input
@@ -73,7 +110,8 @@ const Contact = () => {
                   value={form.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 rounded-lg border border-muted/30 bg-surface focus:outline-none focus:ring-2 focus:ring-primary text-dark font-medium"
+                  disabled={loading}
+                  className="w-full px-4 py-3 rounded-lg border border-muted/30 bg-surface focus:outline-none focus:ring-2 focus:ring-primary text-dark font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                 />
               </motion.div>
               <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}>
@@ -85,7 +123,8 @@ const Contact = () => {
                   value={form.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 rounded-lg border border-muted/30 bg-surface focus:outline-none focus:ring-2 focus:ring-primary text-dark font-medium"
+                  disabled={loading}
+                  className="w-full px-4 py-3 rounded-lg border border-muted/30 bg-surface focus:outline-none focus:ring-2 focus:ring-primary text-dark font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                 />
               </motion.div>
               <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}>
@@ -97,15 +136,27 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 rounded-lg border border-muted/30 bg-surface focus:outline-none focus:ring-2 focus:ring-primary text-dark font-medium"
+                  disabled={loading}
+                  className="w-full px-4 py-3 rounded-lg border border-muted/30 bg-surface focus:outline-none focus:ring-2 focus:ring-primary text-dark font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                 />
               </motion.div>
               <motion.button
                 type="submit"
-                className="w-full py-3 bg-gradient-to-r from-primary to-secondary text-white font-heading text-lg font-bold uppercase tracking-wide rounded-full shadow-xl ring-2 ring-primary/30 backdrop-blur-md hover:scale-105 hover:-translate-y-1 hover:from-secondary hover:to-primary transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-secondary/40"
-                whileHover={{ scale: 1.04 }}
+                disabled={loading}
+                className="w-full py-3 bg-gradient-to-r from-primary to-secondary text-white font-heading text-lg font-bold uppercase tracking-wide rounded-full shadow-xl ring-2 ring-primary/30 backdrop-blur-md hover:scale-105 hover:-translate-y-1 hover:from-secondary hover:to-primary transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-secondary/40 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:translate-y-0"
+                whileHover={!loading ? { scale: 1.04 } : {}}
               >
-                Send Message
+                {loading ? (
+                  <div className="flex items-center justify-center">
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Sending...
+                  </div>
+                ) : (
+                  'Send Message'
+                )}
               </motion.button>
             </form>
           )}

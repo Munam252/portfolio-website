@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "./components/Navbar";
 import HomePage from "./components/HomePage";
 import AboutMe from "./components/AboutMe";
-import Experience from "./components/Experience";
+import EducationExperience from "./components/EducationExperience";
 import MyProjects from "./components/MyProjects";
 import Contact from "./components/Contact";
 import MyFooter from "./components/myFooter";
@@ -13,7 +13,7 @@ const App = () => {
       <Navbar />
       <HomePage />
       <AboutMe />
-      <Experience />
+      <EducationExperience />
       <MyProjects />
       <Contact />
       <MyFooter />
