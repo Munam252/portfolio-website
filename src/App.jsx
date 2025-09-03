@@ -4,7 +4,6 @@ import HomePage from "./components/HomePage";
 import AboutMe from "./components/AboutMe";
 import EducationExperience from "./components/EducationExperience";
 import MyProjects from "./components/MyProjects";
-import Contact from "./components/Contact";
 import MyFooter from "./components/myFooter";
 
 const App = () => {
@@ -15,7 +14,6 @@ const App = () => {
       <AboutMe />
       <EducationExperience />
       <MyProjects />
-      <Contact />
       <MyFooter />
     </>
   );
